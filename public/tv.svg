@@ -1,0 +1,10 @@
+<svg width="72" height="74" viewBox="0 0 72 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M62 16H10C5.02944 16 1 20.0294 1 25V59C1 63.9706 5.02944 68 10 68H62C66.9706 68 71 63.9706 71 59V25C71 20.0294 66.9706 16 62 16Z" stroke="#4a4a4a" stroke-width="2"/>
+<path d="M50 21H48.4706H12.5294H11C8.23858 21 6 23.2386 6 26V28.24V54.76V57C6 59.7614 8.23858 62 11 62H12.5294H48.4706H50C52.7614 62 55 59.7614 55 57V54.76V28.24V26C55 23.2386 52.7614 21 50 21Z" stroke="#4a4a4a" stroke-width="2"/>
+<circle cx="63" cy="34" r="4" stroke="#4a4a4a" stroke-width="2"/>
+<circle cx="63" cy="47" r="4" stroke="#4a4a4a" stroke-width="2"/>
+<line x1="37.9544" y1="15.5865" x2="51.5865" y2="1.0456" stroke="#4a4a4a" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="7.22439" y2="-1" transform="matrix(0.683941 0.729537 0.729537 -0.683941 55 67)" stroke="#4a4a4a" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="20.9317" y2="-1" transform="matrix(-0.683941 -0.729537 -0.729537 0.683941 34 17)" stroke="#4a4a4a" stroke-width="2" stroke-linecap="round"/>
+<line x1="17.6706" y1="68.4135" x2="13.4135" y2="72.9544" stroke="#4a4a4a" stroke-width="2" stroke-linecap="round"/>
+</svg>

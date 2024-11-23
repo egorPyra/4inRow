@@ -1,0 +1,83 @@
+
+@font-face {
+  font-family: 'Gothic';
+  src: url('../app/fonts/Gothic.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('../app/fonts/RobotoSerif.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+:root {
+  --max-width: 1512px;
+  --border-radius: 20px;
+
+  font-size: 16px;
+
+  --background: #FFF8E7;
+  --foreground: #4a4a4a;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Roboto Serif';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Gothic';
+  /* font-size: 4.5rem; */
+}
+
+h2 {
+  font-family: "Roboto Serif";
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.6em;
+  line-height: 120%;
+  color: rgb(var(--foreground-rgb));
+}
+
+p {
+  font-family: 'Roboto Serif';
+  font-size: 16px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
