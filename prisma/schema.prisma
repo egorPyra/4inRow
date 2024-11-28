@@ -1,0 +1,76 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // Connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // Direct connection
+}
+
+enum COLOR_TYPE {
+    BLACK
+    WHITE
+}
+
+enum CHARACTER {
+    RED
+    YELLOW
+    BLUE
+    GREEN
+    CIAN
+    PINK
+    ORANGE
+    PURPLE
+    CHERRY
+}
+
+model Users {
+    email     String     @id @unique
+    password  String
+    active    DateTime?
+    character CHARACTER?
+    invited   Games[]    @relation("InvitedGames")
+    inviter   Games[]    @relation("InviterGames")
+    Players   Players[]
+}
+
+model Session {
+    session_id String   @id @default(uuid()) @db.Uuid // Session identifier (UUID)
+    user_email String   @db.VarChar(255) // The email of the user associated with the session
+    created_at DateTime @default(now()) // Session creation timestamp
+    expires_at DateTime // Session expiration timestamp
+    is_active  Boolean  @default(true) // Flag to mark if the session is active or expired
+
+    @@map("Sessions")
+}
+
+model Games {
+    game_id   Int       @id @default(autoincrement())
+    expires   DateTime
+    duration  String
+    inviterId String?
+    invitedId String?
+    inviter   Users?    @relation("InviterGames", fields: [inviterId], references: [email])
+    invited   Users?    @relation("InvitedGames", fields: [invitedId], references: [email])
+    Players   Players[]
+    winner    String?
+}
+
+model Players {
+    player_id Int        @id @default(autoincrement())
+    game_id   Int
+    email     String
+    game      Games      @relation(fields: [game_id], references: [game_id], onDelete: Cascade, onUpdate: Cascade)
+    user      Users      @relation(fields: [email], references: [email], onDelete: Cascade, onUpdate: Cascade)
+    color     COLOR_TYPE
+    name      String     @db.VarChar(12)
+    Chips     Chips[]
+}
+
+model Chips {
+    chip_id    Int     @id @default(autoincrement())
+    player_id  Int
+    player     Players @relation(fields: [player_id], references: [player_id], onDelete: Cascade, onUpdate: Cascade)
+    coordinate Int
+}
