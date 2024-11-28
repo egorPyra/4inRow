@@ -88,3 +88,25 @@
 .button:hover {
     background-color: rgb(198, 164, 132);
 }
+
+
+
+.backButton {
+    position: fixed;
+    top: 27px;
+    right: 27px;
+    font-size: 1rem;
+    z-index: 2;
+    color: #0070f3;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.backButton:hover {
+    background: rgba(0, 112, 243, 0.1);
+}

@@ -1,0 +1,123 @@
+/* General Page Styling */
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+
+}
+
+/* Back Button */
+.backButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1rem;
+    color: #0070f3;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.backButton:hover {
+    background: rgba(0, 112, 243, 0.1);
+}
+
+/* Rules Window */
+.rulesWindow {
+    width: 450px;
+    min-height: 436px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align content */
+    justify-content: center;
+    background: #FFEAC7;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 27px;
+    max-width: 90%;
+    text-align: left;
+    scroll-snap-align: center; 
+}
+
+.image {
+    width: 100%;
+    max-width: 470px;
+    height: auto;
+    margin-bottom: 16px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    /* font-size: 42rem; */
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 16px;
+    font-family: 'Gothic';
+}
+
+.content {
+    /* font-size: 1rem; */
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* Navigation Arrows */
+.arrowButton {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.arrowButton:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.leftArrow {
+    left: calc(50% - 260px);
+    /* Position near the left of rules box */
+}
+
+.rightArrow {
+    right: calc(50% - 260px);
+    /* Position near the right of rules box */
+}
+
+.counter {
+    margin: 27px;
+    background-color: #FFEAC7;
+}
+
+.playButton {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #1E90FF;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background 0.3s;
+  }
+  
+  .playButton:hover {
+    background-color: rgb(6, 84, 161);
+  }
