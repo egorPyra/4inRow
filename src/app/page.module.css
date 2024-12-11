@@ -60,7 +60,6 @@
   flex-direction: column;
   font-size: 1.8rem;
 }
-
 .div2 {
   display: flex;
   justify-content: center;
@@ -71,7 +70,10 @@
 }
 
 .div2 img {
+  object-fit: cover;
+  
   transition: transform 0.4s ease; 
+  clip-path: inset(0);
 }
 
 .div2 h1 {
@@ -111,10 +113,10 @@
   opacity: 0;
 }
 
-
+/* 
 .div2:hover img {
   transform: scale(1.15);
-}
+} */
 
 .div3 {
   display: flex;
@@ -137,29 +139,39 @@
   font-size: 1rem;
 }
 
+.div4 h1 {
+  font-size: calc(var(--font-size-h1)/1.8);
+}
+
 
 .div5 {
   position: relative;
 }
 
 .div5 h1 {
-  font-size: 4rem;
+  font-size: calc(var(--font-size-h1)*1.5);
   max-width: 60%;
   padding: 27px;
 }
 
 .div5 img {
-  max-width: 100%;
+  max-width: 140%;
   padding: 17px;
   object-fit: contain;
   position: absolute;
-  bottom: 7px;
-  right: 7px;
-  transition: transform 0.4s ease; 
+  bottom: 27px;
+  right: 27px;
+  transform: scale(1.4); 
+  transition: transform 0.3s ease; 
 }
 
+@media (max-width: 1168px) {
+  .div5 img {
+    transform: scale(1.2);
+}}
+
 .div5:hover img {
-  transform: scale(1.1); 
+  transform: scale(1.5); 
 }
 
 .div6 {
@@ -170,7 +182,7 @@
 }
 
 .div6 h1 {
-  font-size: 4rem;
+  font-size: calc(var(--font-size-h1)*1.5);
   max-width: 60%;
   padding: 27px;
   z-index: 1; 

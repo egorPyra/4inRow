@@ -1,16 +1,133 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["multiSchema"]
 }
 
 datasource db {
     provider  = "postgresql"
-    url       = env("POSTGRES_PRISMA_URL") // Connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // Direct connection
+    url       = env("POSTGRES_PRISMA_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
+    schemas   = ["4inRow", "eydresser"]
+}
+
+model Users {
+    email     String     @id @unique
+    password  String
+    active    DateTime?
+    character CHARACTER?
+    invited   Games[]    @relation("InvitedGames")
+    inviter   Games[]    @relation("InviterGames")
+    Players   Players[]
+    session   Session[]
+
+    @@schema("4inRow")
+}
+
+model Session {
+    id         Int      @id @default(autoincrement())
+    token      String   @unique
+    user_email String
+    expires_at DateTime
+    is_active  Boolean  @default(true)
+
+    usersEmail String
+    users      Users  @relation(fields: [usersEmail], references: [email])
+
+    @@schema("4inRow")
+}
+
+model Games {
+    game_id   Int       @id @default(autoincrement())
+    expires   DateTime
+    duration  String
+    inviterId String?
+    invitedId String?
+    winner    String?
+    invited   Users?    @relation("InvitedGames", fields: [invitedId], references: [email])
+    inviter   Users?    @relation("InviterGames", fields: [inviterId], references: [email])
+    Players   Players[]
+
+    @@schema("4inRow")
+}
+
+model Players {
+    player_id Int        @id @default(autoincrement())
+    game_id   Int
+    email     String
+    color     COLOR_TYPE
+    name      String     @db.VarChar(12)
+    Chips     Chips[]
+    user      Users      @relation(fields: [email], references: [email], onDelete: Cascade)
+    game      Games      @relation(fields: [game_id], references: [game_id], onDelete: Cascade)
+
+    @@schema("4inRow")
+}
+
+model Chips {
+    chip_id    Int     @id @default(autoincrement())
+    player_id  Int
+    coordinate Int
+    player     Players @relation(fields: [player_id], references: [player_id], onDelete: Cascade)
+
+    @@schema("4inRow")
+}
+
+model User {
+    id        Int       @id @default(autoincrement())
+    fullName  String
+    email     String    @unique
+    password  String
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    clothes   Clothes[]
+    outfits   Outfit[]
+
+    @@schema("eydresser")
+}
+
+model Clothes {
+    id            Int             @id @default(autoincrement())
+    name          String
+    imageUrl      String?
+    userId        Int
+    createdAt     DateTime        @default(now())
+    updatedAt     DateTime        @updatedAt
+    user          User            @relation(fields: [userId], references: [id])
+    outfitClothes OutfitClothes[]
+
+    @@schema("eydresser")
+}
+
+model Outfit {
+    id        Int             @id @default(autoincrement())
+    name      String
+    userId    Int
+    createdAt DateTime        @default(now())
+    updatedAt DateTime        @updatedAt
+    user      User            @relation(fields: [userId], references: [id])
+    clothes   OutfitClothes[]
+
+    @@schema("eydresser")
+}
+
+model OutfitClothes {
+    id        Int     @id @default(autoincrement())
+    outfitId  Int
+    clothesId Int
+    positionX Float
+    positionY Float
+    rotation  Float
+    clothes   Clothes @relation(fields: [clothesId], references: [id])
+    outfit    Outfit  @relation(fields: [outfitId], references: [id])
+
+    @@schema("eydresser")
 }
 
 enum COLOR_TYPE {
     BLACK
     WHITE
+
+    @@schema("4inRow")
 }
 
 enum CHARACTER {
@@ -23,54 +140,6 @@ enum CHARACTER {
     ORANGE
     PURPLE
     CHERRY
-}
 
-model Users {
-    email     String     @id @unique
-    password  String
-    active    DateTime?
-    character CHARACTER?
-    invited   Games[]    @relation("InvitedGames")
-    inviter   Games[]    @relation("InviterGames")
-    Players   Players[]
-}
-
-model Session {
-    session_id String   @id @default(uuid()) @db.Uuid // Session identifier (UUID)
-    user_email String   @db.VarChar(255) // The email of the user associated with the session
-    created_at DateTime @default(now()) // Session creation timestamp
-    expires_at DateTime // Session expiration timestamp
-    is_active  Boolean  @default(true) // Flag to mark if the session is active or expired
-
-    @@map("Sessions")
-}
-
-model Games {
-    game_id   Int       @id @default(autoincrement())
-    expires   DateTime
-    duration  String
-    inviterId String?
-    invitedId String?
-    inviter   Users?    @relation("InviterGames", fields: [inviterId], references: [email])
-    invited   Users?    @relation("InvitedGames", fields: [invitedId], references: [email])
-    Players   Players[]
-    winner    String?
-}
-
-model Players {
-    player_id Int        @id @default(autoincrement())
-    game_id   Int
-    email     String
-    game      Games      @relation(fields: [game_id], references: [game_id], onDelete: Cascade, onUpdate: Cascade)
-    user      Users      @relation(fields: [email], references: [email], onDelete: Cascade, onUpdate: Cascade)
-    color     COLOR_TYPE
-    name      String     @db.VarChar(12)
-    Chips     Chips[]
-}
-
-model Chips {
-    chip_id    Int     @id @default(autoincrement())
-    player_id  Int
-    player     Players @relation(fields: [player_id], references: [player_id], onDelete: Cascade, onUpdate: Cascade)
-    coordinate Int
+    @@schema("4inRow")
 }

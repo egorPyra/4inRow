@@ -52,7 +52,7 @@ export default function Home() {
         whileTap={{ scale: 0.95 }}
         onClick={() => handleCellClick("/about")}
       >
-        <h1>О проекте</h1>
+        <h1>информацИя</h1>
       </motion.div>
       <motion.div
         className={styles.div5}

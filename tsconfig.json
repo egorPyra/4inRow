@@ -20,8 +20,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["next", "react"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/_app.js", "src/app/page1/page1.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/_app.js", "src/app/page1/page1.js", "lib/prisma.ts"],
   "exclude": ["node_modules"]
 }
